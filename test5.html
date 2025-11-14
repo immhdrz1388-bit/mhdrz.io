@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>درباره ما</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      touch-action: manipulation;
+      overscroll-behavior: contain;
+    }
+
+    * {
+      font-family: 'Vazirmatn', sans-serif !important;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px;
+      direction: rtl;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+    }
+
+    .about-box {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .about-box:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-size: 26px;
+      text-align: center;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.9;
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+
+    a.instagram-link {
+      display: inline-block;
+      background-color: #e1306c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    a.instagram-link:hover {
+      background-color: #c8235a;
+    }
+
+    #back-to-shop {
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+      font-size: 15px;
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    #back-to-shop:hover {
+      color: #1c5980;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      .about-box {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+
+      a.instagram-link {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about-box">
+    <h2>درباره فروشگاه shop mmad</h2>
+    <p>
+      این فروشگاه اینترنتی صرفاً برای تست طراحی شده است و هیچ فروشگاه واقعی وجود ندارد.
+    </p>
+    <p>
+      اگر پیشنهادی برای بهبود سایت دارید، خوشحال می‌شویم از طریق بخش پشتیبانی با ما در ارتباط باشید.
+      <br>
+      شماره تماس: 989927571901
+      <br>
+      آیدی اینستاگرام: im-mhdrz
+    </p>
+    <a href="https://www.instagram.com/im_mhdrz" target="_blank" class="instagram-link">مشاهده پیچ اینستاگرام</a>
+  </div>
+
+  <a href="index.html" id="back-to-shop">بازگشت به فروشگاه</a>
+
+  <script>
+    // جلوگیری از زوم در کامپیوتر و موبایل
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('dblclick', function (e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

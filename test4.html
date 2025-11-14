@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>پشتیبانی</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      touch-action: manipulation;
+      overscroll-behavior: contain;
+    }
+
+    * {
+      font-family: 'Vazirmatn', sans-serif !important;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      direction: rtl;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(to left, #2c3e50, #34495e);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .box {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 700px;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #27ae60;
+      outline: none;
+    }
+
+    button {
+      background: linear-gradient(to left, #f39c12, #e67e22);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+
+    button:hover {
+      background: linear-gradient(to left, #d35400, #e67e22);
+    }
+
+    .message-item {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .message-item:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .message-item strong {
+      color: #2c3e50;
+      font-size: 16px;
+    }
+
+    .message-item small {
+      color: #888;
+      font-size: 12px;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .contact-link {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 16px;
+    }
+
+    .contact-link a {
+      color: #27ae60;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-link a:hover {
+      text-decoration: underline;
+      color: #1e8449;
+    }
+
+    #back-to-shop {
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+      font-size: 15px;
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    #back-to-shop:hover {
+      color: #1c5980;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .box {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>پشتیبانی فروشگاه</header>
+
+  <section class="box">
+    <h2>ارسال پیام</h2>
+    <label for="name">نام:</label>
+    <input type="text" id="name" placeholder="نام خود را وارد کنید">
+
+    <label for="message">پیام:</label>
+    <textarea id="message" rows="4" placeholder="پیام خود را بنویسید"></textarea>
+
+    <button onclick="saveMessage()">ذخیره پیام</button>
+  </section>
+
+  <section class="box">
+    <h2>پیام‌های قبلی</h2>
+    <div id="saved-messages"></div>
+  </section>
+
+  <div class="contact-link">
+    برای پشتیبانی فوری از طریق <a href="https://wa.me/989927571901" target="_blank">واتساپ</a> با ما در تماس باشید.
+  </div>
+
+  <a href="index.html" id="back-to-shop">بازگشت به فروشگاه</a>
+
+  <script>
+    function saveMessage() {
+      const name = document.getElementById('name').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (name && message) {
+        const newMessage = {
+          name,
+          message,
+          time: new Date().toLocaleString()
+        };
+        const messages = JSON.parse(localStorage.getItem('messages')) || [];
+        messages.push(newMessage);
+        localStorage.setItem('messages', JSON.stringify(messages));
+        alert('پیام شما ذخیره شد!');
+        document.getElementById('name').value = '';
+        document.getElementById('message').value = '';
+        displayMessages();
+      } else {
+        alert('لطفاً نام و پیام را وارد کنید.');
+      }
+    }
+
+    function displayMessages() {
+      const saved = JSON.parse(localStorage.getItem('messages')) || [];
+      const container = document.getElementById('saved-messages');
+      container.innerHTML = '';
+      saved.slice().reverse().forEach(msg => {
+        const div = document.createElement('div');
+        div.className = 'message-item';
+        div.innerHTML = `<strong>${msg.name}</strong><br>${msg.message}<small>${msg.time}</small>`;
+        container.appendChild(div);
+      });
+    }
+
+    displayMessages();
+
+    // جلوگیری از زوم در کامپیوتر و موبایل
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('dblclick', function (e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

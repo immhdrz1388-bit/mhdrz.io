@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>ورود / ثبت‌نام</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif !important;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      touch-action: manipulation;
+      overscroll-behavior: contain;
+    }
+
+    body {
+      direction: rtl;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      padding: 35px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00695c;
+      margin-bottom: 30px;
+      font-size: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #004d40;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      border: 1px solid #b2dfdb;
+      font-size: 15px;
+      background-color: #f9f9f9;
+      transition: border 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #26a69a;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #004d40;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .switch a {
+      color: #00796b;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message {
+      text-align: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .success {
+      background-color: #e0f2f1;
+      color: #00695c;
+      border: 1px solid #80cbc4;
+    }
+
+    .error {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #ef9a9a;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+        border-radius: 12px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="auth-container">
+    <!-- فرم ثبت‌نام -->
+    <form id="register-form">
+      <h2>ثبت‌نام در فروشگاه</h2>
+      <div id="register-msg"></div>
+
+      <label for="fullname">نام و نام خانوادگی</label>
+      <input type="text" id="fullname" required />
+
+      <label for="phone">شماره تلفن همراه</label>
+      <input type="tel" id="phone" required />
+
+      <label for="email">ایمیل (اختیاری)</label>
+      <input type="email" id="email" />
+
+      <label for="username">نام کاربری</label>
+      <input type="text" id="username" required />
+
+      <label for="password">رمز عبور</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">ثبت‌نام</button>
+
+      <div class="switch">
+        قبلاً ثبت‌نام کرده‌اید؟ <a onclick="toggleForm()">ورود</a>
+      </div>
+    </form>
+
+    <!-- فرم ورود -->
+    <form id="login-form" style="display: none;">
+      <h2>ورود به فروشگاه</h2>
+      <div id="login-msg"></div>
+
+      <label for="login-username">نام کاربری</label>
+      <input type="text" id="login-username" required />
+
+      <label for="login-password">رمز عبور</label>
+      <input type="password" id="login-password" required />
+
+      <button type="submit">ورود</button>
+
+      <div class="switch">
+        حساب ندارید؟ <a onclick="toggleForm()">ثبت‌نام</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // جلوگیری از زوم در کامپیوتر و موبایل
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('dblclick', function (e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+
+    window.onload = function () {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        window.location.href = 'index.html';
+      }
+    };
+
+    function toggleForm() {
+      const reg = document.getElementById('register-form');
+      const log = document.getElementById('login-form');
+      reg.style.display = reg.style.display === 'none' ? 'block' : 'none';
+      log.style.display = log.style.display === 'none' ? 'block' : 'none';
+      clearMessages();
+    }
+
+    function showMessage(id, text, type) {
+      const el = document.getElementById(id);
+      el.innerHTML = `<div class="message ${type}">${text}</div>`;
+    }
+
+    function clearMessages() {
+      document.getElementById('register-msg').innerHTML = '';
+      document.getElementById('login-msg').innerHTML = '';
+    }
+
+    document.getElementById('register-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearMessages();
+
+      const fullname = document.getElementById('fullname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!fullname || !phone || !username || !password) {
+        showMessage('register-msg', 'لطفاً تمام فیلدهای الزامی را پر کنید.', 'error');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const exists = users.find(u => u.username === username);
+
+      if (exists) {
+        showMessage('register-msg', 'این نام کاربری قبلاً ثبت شده است.', 'error');
+        return;
+      }
+
+      const newUser = { username, password, fullname, phone, email };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('loggedInUser', JSON.stringify(newUser));
+
+      showMessage('register-msg', 'ثبت‌نام با موفقیت انجام شد! در حال انتقال...', 'success');
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearMessages();
+
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];   
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        showMessage('login-msg', 'ورود موفقیت‌آمیز بود! در حال انتقال...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 1500);
+      } else {
+        showMessage('login-msg', 'نام کاربری یا رمز عبور اشتباه است.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

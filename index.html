@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>shop mamad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      font-family: 'Vazirmatn', sans-serif !important;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      touch-action: manipulation;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      direction: rtl;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeInDown 0.8s ease;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      text-align: center;
+      flex: 1;
+    }
+    #welcome {
+      font-size: 14px;
+      color: #ecf0f1;
+      margin-left: 10px;
+    }
+    #logout-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-right: 10px;
+    }
+    #logout-btn:hover {
+      background: #c0392b;
+    }
+    nav {
+      background-color: #34495e;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+      animation: fadeIn 1s ease;
+    }
+    nav a {
+      color: #ecf0f1;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #f1c40f;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+      animation: fadeInUp 1s ease;
+    }
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 200px;
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      animation: zoomIn 0.6s ease;
+    }
+    .card h3 {
+      margin: 15px 0 5px;
+      color: #2c3e50;
+      font-size: 17px;
+    }
+    .card p {
+      color: #16a085;
+      font-size: 16px;
+      margin: 5px 0 15px;
+    }
+    .card button {
+      background-color: #e67e22;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .card button:hover {
+      background-color: #d35400;
+      transform: scale(1.05);
+    }
+    .message {
+      text-align: center;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      max-width: 300px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.5s ease;
+    }
+    .message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .success {
+      background-color: #e0f2f1;
+      color: #00695c;
+      border: 1px solid #80cbc4;
+    }
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      header h1 {
+        flex: unset;
+        margin: 10px 0;
+      }
+      #welcome, #logout-btn {
+        margin: 5px 0;
+      }
+      .container {
+        padding: 30px 10px;
+      }
+      .card {
+        width: 100%;
+      }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span id="welcome"></span>
+    <h1>فروشگاه اینترنتی mamad shop</h1>
+    <button id="logout-btn" onclick="logout()">خروج</button>
+  </header>
+
+  <nav>
+    <a href="#">محصولات</a>
+    <a href="test2.html">سبد خرید</a>
+    <a href="test4.html">پشتیبانی</a>
+    <a href="test5.html">درباره ما</a>
+    <a href="test6.html">حضوری</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <img src="images/sajed.jpg" alt="محصول" />
+      <h3>ساجد</h3>
+      <p>200.000 تومان</p>
+      <button data-name="ساجد" data-price="200.000 تومان" data-img="images/sajed.jpg">افزودن به سبد خرید</button>
+    </div>
+  </div>
+
+  <div id="cart-msg"></div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+      alert('برای ورود به فروشگاه، ابتدا وارد حساب کاربری شوید.');
+      window.location.href = 'test.html';
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('welcome').textContent = `سلام ${user.fullname} عزیز 👋`;
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      alert('از حساب خارج شدید.');
+      window.location.href = 'test.html';
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    document.querySelectorAll('.card button').forEach(button => {
+      button.addEventListener('click', function () {
+        const product = {
+          name: this.dataset.name,
+          price: this.dataset.price,
+          img: this.dataset.img
+        };
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showMessage('محصول به سبد خرید افزوده شد!', 'success');
+      });
+    });
+
+    function showMessage(text, type) {
+      const msg = document.getElementById('cart-msg');
+      msg.innerHTML = `<div class="message ${type} show">${text}</div>`;
+      setTimeout(() => msg.innerHTML = '', 2000);
+    }
+
+    // جلوگیری از زوم با Ctrl+Scroll
+    document.addEventListener('wheel', function(e) {
+      if (e.ctrlKey) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
+
+</body>
+</html>
